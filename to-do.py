@@ -1,27 +1,28 @@
-arr=[]
-while True:
-    print("Welcome to do-list !")
-    print("1 - To add tasks")
-    print("2 - To remove tasks")
-    print("3 - To view tasks")
-    print("4 - Exit")
-    choice=int(input("Enter your choice:"))
-    if choice==1:
-        task=input("Enter the task")
-        arr.append(task)
-    elif choice==3:
-        for i in arr:
-            print(i)   
-    elif choice==2:
-        reo=input("Enter the task to remove:")
-        for i in arr:
-            if reo==i:
-               arr.remove(i)
-            else:
-                print("Task not found")
-    else:
-        print("Thank you !!!")
-        break                   
 
-    
-        
+try:
+    with open("task.txt", "r") as file:
+        arr=[line.strip() for line in file.readlines()]
+except FileNotFoundError:
+    arr=[]
+
+while True:
+    print("1.To add task\n 2.To delete task\n 3.To view the task\n 4.To exit")
+    cho=int(input("Enter your choice :"))
+    if(cho ==1):
+        t=input("Enter the task:")
+        arr.append(t)
+    elif(cho ==2):
+        t=input("Enter the task to delete :")
+        for t in arr:
+            arr.remove(t)
+    elif(cho==3):
+        print("The tasks are :")
+        for i,val in enumerate(arr,1):
+            print(f"{i}.{val}")
+    else:
+        print("Thank you !")
+        with open("text.txt","w") as file:
+            for task in arr:
+                file.write(task+"\n")
+        print("The file saved successfully ")
+        break
